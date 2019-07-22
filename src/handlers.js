@@ -40,8 +40,19 @@ const handlePublic = (request, response, url) => {
 };
 
 const handleAPI = (request, response) => {
-  // add code here!
+  request('http://www.omdbapi.com/apikey.aspx?VERIFYKEY=d9d14a67-c6d2-4271-86dc-862458d16754', { json: true }, (err, response, body) => {
+    if (err) { response.writeHead(500,{
+      "Content-Type":"application/JSON"
+    }) }
+  
+    response.writeHead(200,{
+        "Content-Type":"application/JSON"
+      })
+
+      response.end(JSON.stringify( body));
+});
 }
+
 
 module.exports = {
   handleHomeRoute,
